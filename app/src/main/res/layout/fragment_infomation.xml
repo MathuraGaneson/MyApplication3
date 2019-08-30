@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".infomation">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:drawablePadding="50dp"
+        android:drawableStart="@drawable/ic_person_black_24dp"
+        android:hint="Login"
+        android:inputType="text"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="40dp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawablePadding="50dp"
+        android:drawableStart="@drawable/ic_lock_black_24dp"
+        android:hint="Password"
+        android:inputType="numberPassword"
+        android:layout_marginTop="360dp"
+        android:layout_marginLeft="40dp"/>
+
+
+
+
+</FrameLayout>
