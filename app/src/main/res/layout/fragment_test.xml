@@ -29,17 +29,17 @@
 
 
 
-            <Button
-                android:id="@+id/button_scan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scan"
-                android:layout_below="@+id/editText"
-                android:layout_centerHorizontal="true"
-                android:background="@color/blue"
-                android:textColor="@color/white"
-                android:layout_marginTop="20dp"
-                android:textStyle="bold" />
+<!--            <Button-->
+<!--                android:id="@+id/button_scan"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Scan"-->
+<!--                android:layout_below="@+id/editText"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:background="@color/blue"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:textStyle="bold" />-->
         </RelativeLayout>
 
             <FrameLayout

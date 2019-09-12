@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".login2"
     android:background="@color/graylight"
     android:orientation="vertical"
     android:scrollbars="">
@@ -18,7 +18,7 @@
 
             android:background="@color/blue"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:orientation="vertical">
             <ImageView
                 android:layout_marginTop="45dp"
@@ -33,7 +33,7 @@
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="275dp"
+            android:layout_marginTop="245dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
         >
@@ -47,7 +47,7 @@
                 android:drawableStart="@drawable/ic_person_black_24dp"
                 android:hint="Login"
                 android:inputType="text"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:layout_gravity="center_horizontal"
                 />
 
@@ -59,8 +59,8 @@
                 android:drawablePadding="50dp"
                 android:drawableStart="@drawable/ic_lock_black_24dp"
                 android:hint="Password"
-                android:inputType="numberPassword"
-                android:layout_marginTop="140dp"
+                android:inputType="text"
+                android:layout_marginTop="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"/>
 
@@ -75,7 +75,7 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:layout_marginTop="570dp"
+            android:layout_marginTop="500dp"
             android:layout_marginLeft="100dp"
             android:background="@drawable/custom_button"
             />

@@ -90,27 +90,27 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/checkin_save"
+            android:id="@+id/checkout_save"
             android:layout_height="wrap_content"
             android:layout_width="120dp"
             android:text="SAVE"
-            android:background="@color/blue"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="right"
-            android:layout_marginTop="320dp"/>
+            android:layout_marginTop="320dp"
+            android:background="@drawable/custom_button"/>
 
 
         <Button
-            android:id="@+id/checkin_reset"
+            android:id="@+id/checkout_reset"
             android:layout_height="wrap_content"
             android:layout_width="120dp"
             android:text="RESET"
-            android:background="@color/blue"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="left"
-            android:layout_marginTop="320dp"/>
+            android:layout_marginTop="320dp"
+            android:background="@drawable/custom_button"/>
     </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>

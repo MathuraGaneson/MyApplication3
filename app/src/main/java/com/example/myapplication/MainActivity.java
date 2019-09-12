@@ -55,14 +55,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Saved Successfully", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Saved Successfully", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -134,17 +134,21 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             transaction.replace(R.id.master_container, ((tool_checkout)checkoutfragment ).newInstance());
-            transaction.commit();
+            transaction.commit(); }
 
-        } else if (id == R.id.testing) {
-            Fragment testingfragment = new testing();
+//           else if (id == R.id.testing) {
+//            Fragment testingfragment = new testing();
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+//            transaction.replace(R.id.master_container, ((testing) testingfragment).newInstance());
+//            transaction.commit(); }
+
+           else if (id == R.id.logout) {
+            Fragment logoutfragment = new logout();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-            transaction.replace(R.id.master_container, ((testing) testingfragment).newInstance());
+            transaction.replace(R.id.master_container, ((logout)logoutfragment ).newInstance());
             transaction.commit();
-
-        } else if (id == R.id.logout) {
-
 
         }
 

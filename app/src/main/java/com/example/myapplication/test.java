@@ -59,7 +59,7 @@ public class test extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_test, container, false);
 
-        btn_scan = view.findViewById(R.id.button_scan);
+//        btn_scan = view.findViewById(R.id.button_scan);
 
         barcode = view.findViewById(R.id.editText);
         barcode.setShowSoftInputOnFocus(false);

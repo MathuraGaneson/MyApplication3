@@ -16,10 +16,10 @@
             android:id="@+id/check_out"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Tool Out" />
-        <item
-            android:id="@+id/testing"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Testing" />
+<!--        <item-->
+<!--            android:id="@+id/testing"-->
+<!--            android:icon="@drawable/ic_menu_manage"-->
+<!--            android:title="Testing" />-->
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_menu_manage"
