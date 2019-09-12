@@ -70,7 +70,9 @@ public class login2 extends AppCompatActivity {
     }
 
     private void GetValid(){
-        String data ="/api/tms?logindata={\"username\":\"" + login.getText().toString() + "\",\"password\":\"" + password.getText().toString() + "\"}";
+       String data ="/api/tms?logindata={\"username\":\"" + login.getText().toString() + "\",\"password\":\"" + password.getText().toString() + "\"}";
+
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://pngjvfa01")
@@ -83,7 +85,7 @@ public class login2 extends AppCompatActivity {
            public void onResponse(Call<String> call, Response<String> response) {
                if(response.isSuccessful()){
                    String valid = response.body();
-                   if (valid.equals(true)) {
+                   if (valid.equals("true")) {
                        startActivity(new Intent(login2.this, MainActivity.class));
                        finish();
                    }else{
