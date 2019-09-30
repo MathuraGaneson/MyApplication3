@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tool_info"
+    android:background="@drawable/imagesblue">
+    ">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/corner">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/barcode_id"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Barcode ID"
+                    android:textColor="@color/black"
+
+                    />
+
+                <EditText
+                    android:id="@+id/barcodename"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/barcode_id"
+                    android:hint="Barcode Name"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/barcodename"
+                    android:hint="Description"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/rack1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description"
+                    android:hint="Rack"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/row1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rack1"
+                    android:hint="Row"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/section"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/row1"
+                    android:hint="Section"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/remark_in"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/section"
+                    android:hint="Remarks In"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/checkin_time"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/remark_in"
+                    android:hint="Check In Time"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/user_action"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkin_time"
+                    android:hint="User Action"
+                    android:textColor="@color/black" />
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/button_save"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="Save"-->
+                <!--                    android:layout_below="@id/user_action"-->
+                <!--                    android:background="@color/blue"-->
+                <!--                    android:textColor="@color/white"-->
+                <!--                    android:layout_centerHorizontal="true"-->
+                <!--                    android:layout_marginTop="30dp"-->
+                <!--                    android:layout_marginBottom="30dp"-->
+
+                <!--                    />-->
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </ScrollView>
+
+
+</FrameLayout>

@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ public class checkin extends Fragment {
 
     Button btn_checkin;
     Button btn_reset;
+    Button btn_save;
 
     TextView employee, remark,barcode,status;
     private String mParam2;
@@ -57,7 +60,9 @@ public class checkin extends Fragment {
         barcode = view.findViewById(R.id.barcode_id2);
         remark = view.findViewById(R.id.remarks2);
         status = view.findViewById(R.id.status2);
+        GetSharesPreferences();
 
+        btn_save = view.findViewById(R.id.checkin_save);
 
         btn_checkin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +82,17 @@ public class checkin extends Fragment {
                 status.setText("");
             }
         });
+
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment checkininfo = new checkin_info();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                transaction.replace(R.id.tool_info, ((checkin_info) checkininfo).newInstance());
+                transaction.commit();
+            }
+        });
         return  view;
 
 
@@ -85,7 +101,10 @@ public class checkin extends Fragment {
     }
 
 
-
+ private void GetSharesPreferences(){
+     SharedPreferences prefs = getContext().getSharedPreferences("tms", Context.MODE_PRIVATE);
+     employee.setText(prefs.getString("username","no data"));
+ }
 
 
 //    // TODO: Rename method, update argument and hook method into UI event

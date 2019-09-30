@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ public class tool_checkout extends Fragment {
 
     Button btn_checkout;
     Button btn_reset;
+    Button btn_save;
 
     TextView employee, remark,machine,barcode;
     private String mParam2;
@@ -54,12 +58,13 @@ public class tool_checkout extends Fragment {
 
         btn_checkout = view.findViewById(R.id.checkout_save);
         btn_reset = view.findViewById(R.id.checkout_reset);
+        btn_save = view.findViewById(R.id.checkout_save);
 
         employee = view.findViewById(R.id.employee_name);
         machine = view.findViewById(R.id.machine_id2);
         remark = view.findViewById(R.id.remarksout2);
         barcode = view.findViewById(R.id.barcode_id2);
-
+        GetSharesPreferences();
 
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +84,24 @@ public class tool_checkout extends Fragment {
                 machine.setText("");
             }
         });
-        return  view;
 
-
-
-
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment checkoutinfo = new checkout_info();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                transaction.replace(R.id.tool_info, ((checkout_info) checkoutinfo).newInstance());
+                transaction.commit();
+            }
+        });
+        return view;
     }
+
+    private void GetSharesPreferences(){
+        SharedPreferences prefs = getContext().getSharedPreferences("tms", Context.MODE_PRIVATE);
+        employee.setText(prefs.getString("username","no data"));
+    }
+
+
 }

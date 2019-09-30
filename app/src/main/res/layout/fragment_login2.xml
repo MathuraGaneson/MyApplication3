@@ -59,7 +59,7 @@
                 android:drawablePadding="50dp"
                 android:drawableStart="@drawable/ic_lock_black_24dp"
                 android:hint="Password"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:layout_marginTop="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"/>

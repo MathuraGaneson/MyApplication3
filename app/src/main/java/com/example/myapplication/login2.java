@@ -2,11 +2,13 @@ package com.example.myapplication;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,17 +46,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class login2 extends AppCompatActivity {
-    private EditText login, password;
 
+    private static final String TAG = "MainActivity";
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+
+
+    private EditText login, password,employee;
+    private android.util.Log Log;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login2);
+
         login =  findViewById(R.id.login);
         password = findViewById(R.id.password);
+        employee = findViewById(R.id.employee_name);
 
+
+        mPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPreferences.edit();
+
+
+//        checkSharedPreferences();
         Button btn = findViewById(R.id.simpleButton);
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -64,10 +81,25 @@ public class login2 extends AppCompatActivity {
 //                startActivity(new Intent(login2.this, MainActivity.class));
 //                Toast.makeText(getApplicationContext(), "TEST", Toast.LENGTH_SHORT).show();
 //                finish();
+
+//                String name = employee.getText().toString();
+//                mEditor.putString(getString(R.string.name), name);
+//                mEditor.commit();
+
                 GetValid();
             }
         });
     }
+    private void checkSharedPreferences(){
+         mEditor = getApplicationContext().getSharedPreferences("tms", MODE_PRIVATE).edit();
+         mEditor.putString("username", login.getText().toString());
+         mEditor.commit();
+//        String name = mPreferences.getString(getString(R.string.name),"");
+
+//        employee.setText(name);
+
+    }
+
 
     private void GetValid(){
        String data ="/api/tms?logindata={\"username\":\"" + login.getText().toString() + "\",\"password\":\"" + password.getText().toString() + "\"}";
@@ -86,6 +118,7 @@ public class login2 extends AppCompatActivity {
                if(response.isSuccessful()){
                    String valid = response.body();
                    if (valid.equals("true")) {
+                       checkSharedPreferences();
                        startActivity(new Intent(login2.this, MainActivity.class));
                        finish();
                    }else{
