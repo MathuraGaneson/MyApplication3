@@ -1,42 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".tool_checkout">
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:background="@color/graylight"
-        android:orientation="vertical"
-        android:scrollbars="">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:contentPadding="16dp">
 
-        <RelativeLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:text="Tools Check Out"
+            android:textColor="@color/blue"
+            android:textSize="15dp"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="16dp"/>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/name_text_input"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="300dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/barcode_id2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_centerInParent="true"
+                android:hint="Barcode ID"
+                android:textSize="13dp"
+                android:layout_marginTop="20dp"
+                />
 
-                app:errorEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/employee_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="Employee Name"
+                android:text="mathura"
+                android:textSize="13dp"
+                android:layout_marginTop="50dp"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/employee_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Barcode ID" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/machine_id2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Machine ID"
+                android:textSize="13dp"
+                android:layout_marginTop="80dp"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/remarksout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Remarks Out"
+                android:textSize="13dp"
+                android:layout_marginTop="110dp"/>
 
-        </RelativeLayout>
+
+        <Button
+            android:id="@+id/checkout_save"
+            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:text="CHECK OUT"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:layout_marginTop="165dp"
+            android:background="@drawable/custom_button"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
 
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingTop="340dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <include layout="@layout/tools" />
+
+    </RelativeLayout>
+</FrameLayout>
+
 
 
 

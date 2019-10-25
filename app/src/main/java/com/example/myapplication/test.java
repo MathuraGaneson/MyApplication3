@@ -1,12 +1,16 @@
 package com.example.myapplication;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,7 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -25,6 +33,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.HTTP;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +44,13 @@ public class test extends Fragment {
      View view;
      private Button btn_scan;
      private EditText barcode;
+     ListView lv;
+     ArrayList<ToolInfo> info;
+
+    private static final String TAG = "MainActivity";
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
 
      TextWatcher textWatcher = new TextWatcher() {
          @Override
@@ -78,6 +95,11 @@ public class test extends Fragment {
         barcode.addTextChangedListener(textWatcher);
         barcode.requestFocus();
 
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        mEditor = mPreferences.edit();
+
+
+
 //        btn_scan.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -91,10 +113,15 @@ public class test extends Fragment {
         return view;
     }
 
+    private void checkbarcodesharepreferences(){
+        mEditor = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE).edit();
+        mEditor.putString("barcode", barcode.getText().toString());
+        mEditor.commit();
+    }
 
 
     private void GetValidbarcode(){
-        String data = "/api/tms?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
+        final String data = "/api/tms?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
 
 
 
@@ -109,15 +136,20 @@ public class test extends Fragment {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     String valid = response.body();
+//                    info = new ArrayList<>(Arrays.asList(valid.));
+//                    lv = view.findViewById(R.id.listview);
+//                    lv.setAdapter(new SearchToolAdapter(info, getActivity()));
 //                      boolean valid = true;
 //                      boolean valid2 = false;
                         if (valid.equals("\"true\"")){
                         Toast.makeText(getContext(), "Barcode Exist", Toast.LENGTH_SHORT).show();
+                        checkbarcodesharepreferences();
                         Fragment toolinfo = new tool_info();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                        transaction.replace(R.id.tool_info, ((tool_info) toolinfo).newInstance());
+                        transaction.replace(R.id.tool_info,tool_info.newInstance());
                         transaction.commit();
+
                     }else{
                         Toast.makeText(getContext(), "Barcode not exist!", Toast.LENGTH_SHORT).show();
                         barcode.setText("");

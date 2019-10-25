@@ -16,13 +16,124 @@ public class ToolInfo {
   private String rack;
   private String row;
   private String section;
+  private String process;
+  private String machineid;
+  private String barcode_id2;
+  private String employee_name;
+  private String status_spinner;
+  private String action_bar_spinner2;
+  private String action_bar_spinner3;
+  private String keyinmachine2;
+  private String barcode_checkin;
+
+    public String getBarcode_checkin() {
+        return barcode_checkin;
+    }
+
+    public void setBarcode_checkin(String barcode_checkin) {
+        this.barcode_checkin = barcode_checkin;
+    }
+
+    public String getBarcode_id2() {
+        return barcode_id2;
+    }
+
+    public void setBarcode_id2(String barcode_id2) {
+        this.barcode_id2 = barcode_id2;
+    }
+
+    public String getEmployee_name() {
+        return employee_name;
+    }
+
+    public void setEmployee_name(String employee_name) {
+        this.employee_name = employee_name;
+    }
+
+    public String getStatus_spinner() {
+        return status_spinner;
+    }
+
+    public void setStatus_spinner(String status_spinner) {
+        this.status_spinner = status_spinner;
+    }
+
+    public String getAction_bar_spinner2() {
+        return action_bar_spinner2;
+    }
+
+    public void setAction_bar_spinner2(String action_bar_spinner2) {
+        this.action_bar_spinner2 = action_bar_spinner2;
+    }
+
+    public String getAction_bar_spinner3() {
+        return action_bar_spinner3;
+    }
+
+    public void setAction_bar_spinner3(String action_bar_spinner3) {
+        this.action_bar_spinner3 = action_bar_spinner3;
+    }
+
+    public String getKeyinmachine2() {
+        return keyinmachine2;
+    }
+
+    public void setKeyinmachine2(String keyinmachine2) {
+        this.keyinmachine2 = keyinmachine2;
+    }
+
+    public String getRemarksout2() {
+        return remarksout2;
+    }
+
+    public void setRemarksout2(String remarksout2) {
+        this.remarksout2 = remarksout2;
+    }
+
+    private String remarksout2;
+
+
+
+
+    public ToolInfo() {
+        this.Barcode = Barcode;
+        this.statusid = statusid;
+        this.toolspec = toolspec;
+        this.toolgroup = toolgroup;
+        this.processid = processid;
+        this.lastpmdate = lastpmdate;
+        this.barcodename = barcodename;
+        this.vendorname = vendorname;
+        this.pmid = pmid;
+        this.rack = rack;
+        this.row = row;
+        this.section = section;
+        this.process = process;
+        this.machineid = machineid;
+    }
+
+    public String getProcess() {
+        return process;
+    }
+
+    public void setProcess(String process) {
+        this.process = process;
+    }
+
+    public String getMachineid() {
+        return machineid;
+    }
+
+    public void setMachineid(String machineid) {
+        this.machineid = machineid;
+    }
 
     public String getBarcode() {
         return Barcode;
     }
 
     public void setBarcode(String barcode) {
-        Barcode = barcode;
+        this.Barcode = barcode;
     }
 
     public String getStatusid() {

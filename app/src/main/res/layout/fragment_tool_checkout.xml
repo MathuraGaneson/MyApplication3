@@ -24,7 +24,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/machine_id"
+            android:id="@+id/barcode_id"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -33,10 +33,10 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/machine_id2"
+                android:id="@+id/barcode_checkout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Machine ID"
+                android:hint="Barcode ID"
                 android:textSize="13dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -61,20 +61,72 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/status_spinner"
+            android:layout_marginTop="135dp"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/spinnerborder"/>
+
+
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/machine_id"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="130dp"-->
+<!--            app:errorEnabled="true">-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/machine_id2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Machine ID"-->
+<!--                android:textSize="13dp"/>-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_bar_spinner2"
+            android:layout_marginTop="190dp"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/spinnerborder"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_bar_spinner3"
+            android:layout_marginTop="220dp"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/spinnerborder"/>
+
+<!--        <Spinner-->
+<!--            android:layout_width="130dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/action_bar_spinner3"-->
+<!--            android:layout_marginTop="185dp"-->
+<!--            android:layout_marginLeft="3dp"-->
+<!--            android:background="@drawable/spinnerborder"/>-->
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/barcode_id"
+            android:id="@+id/keyinmachine"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="245dp"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/barcode_id2"
+                android:id="@+id/keyinmachine2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Barcode ID"
+                android:hint="Manual Key-in Machine ID"
+                android:enabled="false"
                 android:textSize="13dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="295dp"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -97,6 +149,8 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
         <Button
             android:id="@+id/checkout_save"
             android:layout_height="wrap_content"
@@ -105,20 +159,20 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="right"
-            android:layout_marginTop="235dp"
+            android:layout_marginTop="350dp"
             android:background="@drawable/custom_button"/>
 
 
-        <Button
-            android:id="@+id/checkout_reset"
-            android:layout_height="wrap_content"
-            android:layout_width="120dp"
-            android:text="RESET"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="left"
-            android:layout_marginTop="235dp"
-            android:background="@drawable/custom_button"/>
+<!--        <Button-->
+<!--            android:id="@+id/checkout_reset"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:text="RESET"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="left"-->
+<!--            android:layout_marginTop="340dp"-->
+<!--            android:background="@drawable/custom_button"/>-->
     </com.google.android.material.card.MaterialCardView>
 
 
@@ -126,9 +180,10 @@
         android:layout_width="match_parent"
         android:paddingTop="340dp"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"/>
+
+
 
         <include layout="@layout/tools" />
 
-    </RelativeLayout>
-</FrameLayout>
+        </FrameLayout>

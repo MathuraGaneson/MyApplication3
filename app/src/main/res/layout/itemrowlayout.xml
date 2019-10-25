@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/barcodeinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Barcode"/>
+
+    <TextView
+        android:id="@+id/statusinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"/>
+
+    <TextView
+        android:id="@+id/specinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tool Specification"/>
+    <TextView
+        android:id="@+id/categoryinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"/>
+    <TextView
+        android:id="@+id/processinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Process"/>
+    <TextView
+        android:id="@+id/pmdateinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LastPmDate"/>
+    <TextView
+        android:id="@+id/bnameinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Barcode Name"/>
+    <TextView
+        android:id="@+id/manufacturerinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manufacturer"/>
+    <TextView
+        android:id="@+id/pmcycleinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pm Cycle"/>
+    <TextView
+        android:id="@+id/rackinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rack"/>
+    <TextView
+        android:id="@+id/rowinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Row"/>
+    <TextView
+        android:id="@+id/compartmentinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compartment"/>
+</LinearLayout>

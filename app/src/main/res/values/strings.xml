@@ -13,10 +13,115 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="api">api/test?</string>
+    <string name="api">api/tms?</string>
 
     <string name="name">com.example.myapplication.name</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="names">
+        <item>-STATUS-</item>
+        <item>Available</item>
+        <item>Faulty</item>
+        <item>PM</item>
+        <item>In Use</item>
+        <item>MAINT/REPAIR</item>
+    </string-array>
+
+    <string-array name="status">
+        <!--        <item>MACHINE ID</item>-->
+        <item>Checkout</item>
+        <item>Pm/faulty Checkout</item>
+    </string-array>
+
+<!--    <string-array name="names2">-->
+<!--        <item>Process</item>-->
+<!--        <item>STB</item>-->
+<!--        <item>ASA</item>-->
+<!--        <item>BALL ATTACH</item>-->
+<!--        <item>DEK</item>-->
+<!--        <item>DEK(FOL)</item>-->
+<!--        <item>DAT(FOL)</item>-->
+<!--        <item>IPAC(FOL)</item>-->
+<!--        <item>PNP</item>-->
+<!--        <item>DEK TOOLINGS</item>-->
+<!--        <item>DATACON TOOLINGS</item>-->
+<!--        <item>FINAL TEST</item>-->
+<!--        <item>DRAGON</item>-->
+<!--        <item>MOUNTING</item>-->
+<!--        <item>SAWING</item>-->
+<!--        <item>LASER</item>-->
+<!--        <item>DIPENSING</item>-->
+<!--        <item>FUJI</item>-->
+<!--    </string-array>-->
+
+<!--    <string-array name="spinner2">-->
+<!--        <item>Select the process</item>-->
+<!--    </string-array>-->
+
+
+    <string-array name="asa">
+<!--        <item>MACHINE ID</item>-->
+        <item>STF-01</item>
+        <item>STF-02</item>
+        <item>STF-03</item>
+        <item>STF-04</item>
+        <item>STF-05</item>
+        <item>STF-06</item>
+        <item>STF-07</item>
+        <item>STF-08</item>
+        <item>STF-09</item>
+        <item>STF-10</item>
+        <item>STF-11</item>
+        <item>STF-12</item>
+        <item>STF-13</item>
+    </string-array>
+
+    <string-array name="ball">
+        <!--        <item>MACHINE ID</item>-->
+        <item>BM-01-FT</item>
+        <item>BM-01-RT</item>
+        <item>BM-02-FT</item>
+        <item>BM-02-RT</item>
+        <item>BM-03-FT</item>
+        <item>BM-03-RT</item>
+        <item>BM-04-FT</item>
+        <item>BM-04-RT</item>
+    </string-array>
+
+    <string-array name="dekfol">
+        <!--        <item>MACHINE ID</item>-->
+        <item>DEK-01</item>
+        <item>DEK-02</item>
+        <item>DEK-06</item>
+        <item>DEK-06A</item>
+        <item>DEK-11</item>
+        <item>DEK-18</item>
+        <item>DEK-19</item>
+        <item>DEK-20</item>
+        <item>DEK-F13</item>
+    </string-array>
+
+    <string-array name="datfol">
+        <!--        <item>MACHINE ID</item>-->
+        <item>FCQ-02-LH</item>
+        <item>FCQ-02-RH</item>
+        <item>FCQ-07-LH</item>
+        <item>FCQ-07-RH</item>
+        <item>FCQ-08</item>
+        <item>FCQ-10-LH</item>
+        <item>FCQ-10-RH</item>
+        <item>FCQ-11-LH</item>
+        <item>FCQ-11-RH</item>
+        <item>FCQ-12-LH</item>
+        <item>FCQ-12-RH</item>
+        <item>FCQ-13-LH</item>
+        <item>FCQ-13-RH</item>
+        <item>FCQ-F01-LH</item>
+        <item>FCQ-F01-RH</item>
+        <item>FCQ-F07A-LH</item>
+        <item>FCQ-F07A-RH</item>
+    </string-array>
+
+
+
+
 </resources>
