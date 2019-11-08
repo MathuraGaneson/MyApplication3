@@ -1,18 +1,26 @@
 package com.example.myapplication;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -44,11 +52,13 @@ public class checkin extends Fragment {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+//            if (!barcode.getText().toString().equals(""))
+//            {
+//                Toast.makeText(getContext(), "Nt null", Toast.LENGTH_SHORT).show();
+//                barcode.setText("");
+//            }else{
+//                Toast.makeText(getContext(), "Null", Toast.LENGTH_SHORT).show();
+//            }
         }
 
         @Override
@@ -58,7 +68,32 @@ public class checkin extends Fragment {
 //                transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 //                transaction.replace(R.id.tool_info, ((tool_info) toolinfo).newInstance());
 //                transaction.commit();
-            GetValidbarcode();
+
+//            if (!TextUtils.isEmpty(barcode.getText().toString()))
+//            {
+//                GetValidbarcode();
+//            }
+
+//            if (!barcode.getText().toString().equals(""))
+//            {
+//                Toast.makeText(getContext(), "Nt null", Toast.LENGTH_SHORT).show();
+//                barcode.setText("");
+//            }else{
+//                Toast.makeText(getContext(), "Null", Toast.LENGTH_SHORT).show();
+//            }
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+//            if (!barcode.getText().toString().equals(""))
+//            {
+//                Toast.makeText(getContext(), "Nt null", Toast.LENGTH_SHORT).show();
+//                barcode.setText("");
+//            }else{
+//                Toast.makeText(getContext(), "Null", Toast.LENGTH_SHORT).show();
+//            }
         }
     };
     public static checkin newInstance() {
@@ -79,7 +114,6 @@ public class checkin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         view = inflater.inflate(R.layout.fragment_checkin, container, false);
 
         btn_checkin = view.findViewById(R.id.checkin_save);
@@ -92,8 +126,46 @@ public class checkin extends Fragment {
         barcode.addTextChangedListener(textWatcher);
         barcode.requestFocus();
 
+        barcode.setInputType(InputType.TYPE_CLASS_TEXT);
+        barcode.requestFocus();
+        InputMethodManager mgr = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.showSoftInput(barcode, InputMethodManager.SHOW_FORCED);
+
+
+        barcode.setClickable(false);
+
+        barcode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                hideKeyboard(getActivity());
+            }
+        });
+
+        barcode.requestFocus();
+
+//        barcode.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                 String checkinbarcode = barcode.getText().toString();
+//                if (keyCode == KeyEvent.KEYCODE_ENTER && barcode.length() > 0) {
+//                    if (barcode.equals(null)){
+//                        barcode.setText(checkinbarcode);
+//                    }else if (!barcode.equals(null))
+//                    {
+//                        barcode.setText("");
+//                        barcode.setText(checkinbarcode);
+//                    }
+////                    (checkinbarcode);
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+
         remark = view.findViewById(R.id.remarks2);
 //        status = view.findViewById(R.id.status2);
+        hideKeyboard( getActivity());
         GetSharesPreferences();
 
         spinner = view.findViewById(R.id.action_bar_spinner);
@@ -107,6 +179,8 @@ public class checkin extends Fragment {
         btn_checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                GetValidbarcode();
 //                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
 //
 //                String Remarks = remark.getText().toString();
@@ -118,12 +192,13 @@ public class checkin extends Fragment {
             }
         });
 
+
+
         btn_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Reset Done",Toast.LENGTH_SHORT).show();
 
-                employee.setText("");
                 barcode.setText("");
                 remark.setText("");
 //                status.setText("");
@@ -133,27 +208,70 @@ public class checkin extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
+                GetValidbarcode();
+//                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
 
-                String BarCodeID = barcode.getText().toString();
-                String RemarksIn = remark.getText().toString();
-                String Status = spinner.getSelectedItem().toString();
-
-//                String updatedata = "(\"Barcodeid\":\"" + BarCodeID + "\",\"Remarks\":\"" + RemarksIn + "\",\"Status\":\"" + Status + "\")";
-//                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
-
+//                String BarCodeID = barcode.getText().toString();
+//                String RemarksIn = remark.getText().toString();
+//                String Status = spinner.getSelectedItem().toString();
+//
+//                final String updatedata = "/api/tms?toolinupdate=(\"Barcodeid\":\"" + BarCodeID + "\",\"Remarks\":\"" + RemarksIn + "\",\"Status\":\"" + Status + "\")";
+////                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
+//                Retrofit retrofit = new Retrofit.Builder()
+//                        .baseUrl("http://pngjvfa01/")
+//                        .addConverterFactory(ScalarsConverterFactory.create())
+//                        .build();
+//
+//                Call<String> call = retrofit.create(retro.GetValidbarcode.class).getvalidationbarcode(updatedata);
             }
         });
         return  view;
+
     }
 
+    public static void hideKeyboard(Activity activity) {
 
+        View view = activity.findViewById(android.R.id.content);
+
+        if (view != null) {
+
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        }
+
+    }
  private void GetSharesPreferences(){
      SharedPreferences prefs = getContext().getSharedPreferences("tms", Context.MODE_PRIVATE);
      employee.setText(prefs.getString("username","no data"));
  }
 
+private  void Getcheckin(){
+                String BarCodeID = barcode.getText().toString();
+                String RemarksIn = remark.getText().toString();
+                String StatusID = spinner.getSelectedItem().toString();
 
+                final String updatedata = "/api/tms?toolinupdate=(\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"StatusID\":\"" + StatusID + "\")";
+//                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("http://pngjvfa01/")
+                        .addConverterFactory(ScalarsConverterFactory.create())
+                        .build();
+
+                Call<String> call = retrofit.create(retro.GetValidbarcode.class).getvalidationbarcode(updatedata);
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+//                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+//                        Toast.makeText(getContext(),"Fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
+}
     private void GetValidbarcode(){
 
         final String data = "/api/tms?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
@@ -169,20 +287,50 @@ public class checkin extends Fragment {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     String valid = response.body();
+
 //                    info = new ArrayList<>(Arrays.asList(valid.));
 //                    lv = view.findViewById(R.id.listview);
 //                    lv.setAdapter(new SearchToolAdapter(info, getActivity()));
 //                      boolean valid = true;
 //                      boolean valid2 = false;
-
                     if (valid.equals("\"false\"")){
                         Toast.makeText(getContext(), "Tool Not Exist", Toast.LENGTH_SHORT).show();
+//                        barcode.setText("");
+//                        remark.setEnabled(false);
+//                        spinner.setEnabled(false);
 
-                    }else{
-                        Toast.makeText(getContext(), "Tool exist!", Toast.LENGTH_SHORT).show();
-                        barcode.setText("");
 
 
+                    }else if(valid.equals("\"true\"")){
+//                        Toast.makeText(getContext(), "Tool exist!", Toast.LENGTH_SHORT).show();
+//                        barcode.setText("");
+                        if((remark == null)){
+                            if(!spinner.getSelectedItem().toString().trim().equals("-STATUS-"))
+                            {
+                                Getcheckin();
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                                alertDialogBuilder.setMessage("Checkin Completed.");
+                                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
+//                                Toast.makeText(getContext(), "Check In Completed", Toast.LENGTH_SHORT).show();
+                                remark.setText("");
+
+                            }else{
+                                Toast.makeText(getContext(), "Status Invalid", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }else{
+                                Toast.makeText(getContext(), "remarks Invalid", Toast.LENGTH_SHORT).show();
+                            }
+
+                    }else {
+                        Toast.makeText(getContext(), "Barcode Invalid", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -190,11 +338,13 @@ public class checkin extends Fragment {
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
                     barcode.setText("");
                 }
+
+                barcode.setText("");
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "TEST", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Get Validation Barcode Fail", Toast.LENGTH_SHORT).show();
             }
         });
 
