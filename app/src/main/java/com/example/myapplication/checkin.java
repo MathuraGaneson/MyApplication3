@@ -181,6 +181,7 @@ public class checkin extends Fragment {
             public void onClick(View view) {
 
                 GetValidbarcode();
+
 //                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
 //
 //                String Remarks = remark.getText().toString();
@@ -251,19 +252,33 @@ private  void Getcheckin(){
                 String BarCodeID = barcode.getText().toString();
                 String RemarksIn = remark.getText().toString();
                 String StatusID = spinner.getSelectedItem().toString();
+                String CardID = employee.getText().toString();
 
-                final String updatedata = "/api/tms?toolinupdate=(\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"StatusID\":\"" + StatusID + "\")";
+                final String updatedata = "/api/tms?toolinupdate=(\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"StatusID\":\"" + StatusID + "\",\"ReturnBy\":\"" + CardID + "\")";
 //                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://pngjvfa01/")
+                        .baseUrl("http://pngjvfa01")
                         .addConverterFactory(ScalarsConverterFactory.create())
                         .build();
 
-                Call<String> call = retrofit.create(retro.GetValidbarcode.class).getvalidationbarcode(updatedata);
+                Call<String> call = retrofit.create(retro.Getcheckin.class).getvalidcheckin(updatedata);
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 //                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getContext(),"success in GetCheckin",Toast.LENGTH_SHORT).show();
+
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                        alertDialogBuilder.setMessage("Check In Completed.");
+                        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
                     }
 
                     @Override
@@ -277,7 +292,7 @@ private  void Getcheckin(){
         final String data = "/api/tms?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://pngjvfa01/")
+                .baseUrl("http://pngjvfa01")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
@@ -299,27 +314,17 @@ private  void Getcheckin(){
 //                        remark.setEnabled(false);
 //                        spinner.setEnabled(false);
 
-
-
                     }else if(valid.equals("\"true\"")){
-//                        Toast.makeText(getContext(), "Tool exist!", Toast.LENGTH_SHORT).show();
+                        Getcheckin();
 //                        barcode.setText("");
-                        if((remark == null)){
+
+                        if(remark.getText().toString().trim().length()>0){
                             if(!spinner.getSelectedItem().toString().trim().equals("-STATUS-"))
                             {
-                                Getcheckin();
-                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-                                alertDialogBuilder.setMessage("Checkin Completed.");
-                                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();
+//                                Toast.makeText(getContext(),"success in GetValidationbarcode",Toast.LENGTH_SHORT).show();
+//                                Getcheckin();
 //                                Toast.makeText(getContext(), "Check In Completed", Toast.LENGTH_SHORT).show();
-                                remark.setText("");
+//                                remark.setText("");
 
                             }else{
                                 Toast.makeText(getContext(), "Status Invalid", Toast.LENGTH_SHORT).show();
@@ -328,7 +333,7 @@ private  void Getcheckin(){
                         }else{
                                 Toast.makeText(getContext(), "remarks Invalid", Toast.LENGTH_SHORT).show();
                             }
-
+                        Getcheckin();
                     }else {
                         Toast.makeText(getContext(), "Barcode Invalid", Toast.LENGTH_SHORT).show();
                     }

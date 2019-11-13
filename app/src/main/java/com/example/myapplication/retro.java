@@ -37,6 +37,11 @@ public interface retro {
         Call<String>putcheckin(@Url String url);
     }
 
+    interface Getcheckin{
+        @GET
+        Call<String>getvalidcheckin(@Url String url);
+    }
+
 //    public interface  GetInfo{
 //        @GET
 //        Call<tool_info.JsonResponse> getJson(@Url String url);
