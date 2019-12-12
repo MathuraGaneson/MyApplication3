@@ -6,25 +6,34 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/tool_search"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_search_black_24dp"
             android:title="Tool Search" />
         <item
             android:id="@+id/check_in"
-            android:icon="@drawable/ic_search_black_24dp"
+            android:icon="@drawable/ic_add_circle_outline_black_24dp"
             android:title="Tool In" />
         <item
             android:id="@+id/check_out"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_remove_circle_outline_black_24dp"
             android:title="Tool Out" />
-<!--        <item-->
-<!--            android:id="@+id/testing"-->
-<!--            android:icon="@drawable/ic_menu_manage"-->
-<!--            android:title="Testing" />-->
+        <item
+            android:id="@+id/newtool"
+            android:icon="@drawable/ic_fiber_new_black_24dp"
+            android:title="New Tool" />
+        <item
+            android:id="@+id/newcategory"
+            android:icon="@drawable/ic_control_point_duplicate_black_24dp"
+            android:title="New Category" />
+        <item
+            android:id="@+id/newspec"
+            android:icon="@drawable/ic_details_black_24dp"
+            android:title="New Specification" />
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_cancel_black_24dp"
             android:title="Log Out" />
     </group>
 
-
 </menu>
+
+

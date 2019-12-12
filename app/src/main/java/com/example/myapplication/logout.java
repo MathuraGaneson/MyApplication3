@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,24 +30,42 @@ public class logout extends Fragment {
             View view = inflater.inflate(R.layout.fragment_logout, container, false);
 
             Button logout = view.findViewById(R.id.yes);
+            Button logout_no = view.findViewById(R.id.no);
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                    logoutFragment();
                 }
             });
+            logout_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    noFragment();
+                }
+            });
             return view;
         }
 
+
         private void logoutFragment(){
-                Fragment loginnew = new Fragment();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                transaction.replace(R.id.login,loginnew);
-                transaction.addToBackStack(null);
-                transaction.commit();
+            Intent intent;
+            intent = new Intent(getContext(), login2.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
+            startActivity(intent);
 
         }
+
+    private void noFragment(){
+        Intent intent;
+        intent = new Intent(getContext(),MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
+
+    private void finish() {
+    }
 
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,

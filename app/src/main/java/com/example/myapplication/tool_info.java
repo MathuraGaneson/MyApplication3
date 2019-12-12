@@ -40,7 +40,8 @@ import static android.content.Context.MODE_PRIVATE;
     ArrayList<ToolInfo>info;
     ListView listView;
     private static SearchToolAdapter adapter;
-
+    private  String barcode_id;
+    private SharedPreferences.Editor mEditor;
 
         private String apilink;
         View view;
@@ -96,8 +97,13 @@ import static android.content.Context.MODE_PRIVATE;
         compartment = view.findViewById(R.id.compartment);
 
 
+        spf = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE);
+        barcode_id = spf.getString("barcode",null);
 
-        GetValidtool();
+        if(barcode_id!=null){
+            GetValidtool();
+        }
+
 
 
 //        btn_save.setOnClickListener(new View.OnClickListener() {
@@ -109,12 +115,19 @@ import static android.content.Context.MODE_PRIVATE;
         return  view;
     }
 
+
+
     private void GetValidtool(){
 
-        spf = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE);
-        String barcode_id = spf.getString("barcode",null);
+//        spf = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE);
+//        String barcode_id = spf.getString("barcode",null);
 
-        final String data ="/api/tms?searchdata={\"barcodeid\":\"" + barcode_id + "\"}";
+//        if(barcode_id == null){
+//            onStop();
+//        }else{}
+
+
+        final String data ="/api/tmsDev?searchdata={\"barcodeid\":\"" + barcode_id + "\"}";
 
 //        final String data ="/api/tms?toolsearchdata={\"barcodeid\":\"BMA5015025130001\"}";
 //        \"StatusID\":\"" + status.getText().toString() + "\"
@@ -161,10 +174,10 @@ import static android.content.Context.MODE_PRIVATE;
                         for (int i = 0; i < dataArray.length(); i++) {
 //                            Toast.makeText(getContext(), "jsrespone RETRIEVING", Toast.LENGTH_SHORT).show();
 //                            Toast.makeText(getContext(), String.valueOf(i), Toast.LENGTH_SHORT).show();
-                            ToolInfo toolInfodata = new ToolInfo();
+
                             JSONObject dataobj = dataArray.getJSONObject(i);
 
-
+                            ToolInfo toolInfodata = new ToolInfo();
                             toolInfodata.setBarcode(dataobj.getString("BarcodeID"));
                             toolInfodata.setStatusid(dataobj.getString("Status"));
                             toolInfodata.setToolspec(dataobj.getString("Description"));
@@ -185,22 +198,24 @@ import static android.content.Context.MODE_PRIVATE;
 
 
                         for (int j = 0; j < toolInfoList.size(); j++) {
-                            barcode.setText(toolInfoList.get(j).getBarcode());
-                            status.setText(toolInfoList.get(j).getStatusid());
-                            specification.setText(toolInfoList.get(j).getToolspec());
-                            category.setText(toolInfoList.get(j).getToolgroup());
-                            process.setText(toolInfoList.get(j).getProcessid());
-                            date.setText(toolInfoList.get(j).getLastpmdate());
-                            name.setText(toolInfoList.get(j).getBarcodename());
-                            manufacturer.setText(toolInfoList.get(j).getVendorname());
-                            cycle.setText(toolInfoList.get(j).getPmid());
-                            rack.setText(toolInfoList.get(j).getRack());
-                            row.setText(toolInfoList.get(j).getRow());
-                            compartment.setText(toolInfoList.get(j).getSection());
+                            barcode.setText("Barcode ID : " + toolInfoList.get(j).getBarcode());
+                            status.setText("Status : " +toolInfoList.get(j).getStatusid());
+                            specification.setText("Description : " +toolInfoList.get(j).getToolspec());
+                            category.setText("Tool Category : " +toolInfoList.get(j).getToolgroup());
+                            process.setText("Process : " +toolInfoList.get(j).getProcessid());
+                            date.setText("Last PM Date : " +toolInfoList.get(j).getLastpmdate());
+                            name.setText("Barcode Name : " +toolInfoList.get(j).getBarcodename());
+                            manufacturer.setText("Vendor Name : " +toolInfoList.get(j).getVendorname());
+                            cycle.setText("PM Cycle : " +toolInfoList.get(j).getPmid());
+                            rack.setText("Rack : " +toolInfoList.get(j).getRack());
+                            row.setText("Row : " +toolInfoList.get(j).getRow());
+                            compartment.setText("Section : " +toolInfoList.get(j).getSection());
 
 //                                Toast.makeText(getContext(), "population", Toast.LENGTH_SHORT).show();
 
                         }
+
+                        checkbarcodesharepreferences();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -219,7 +234,15 @@ import static android.content.Context.MODE_PRIVATE;
 
     }
 
+    private void checkbarcodesharepreferences(){
+        mEditor = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE).edit();
+        mEditor.putString("barcode", "");
+        mEditor.commit();
+    }
+
       }
+
+
 
 //  private void GetValidtool(){
 //

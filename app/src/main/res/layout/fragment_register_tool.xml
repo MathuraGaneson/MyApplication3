@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".tool_checkout"
+    android:background="@drawable/imagesblue">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:contentPadding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="General Infomations"
+            android:textColor="@color/blue"
+            android:textSize="15dp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Process"
+            android:textColor="@color/blue"
+            android:textSize="13dp"
+            android:layout_marginTop="45dp"
+            android:gravity="left" />
+        <Spinner
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:id="@+id/spinner_process"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="3dp"
+            android:entries="@array/process"
+            android:layout_gravity="right"
+            android:background="@drawable/spinnerborder"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Tool Category"
+            android:textColor="@color/blue"
+            android:textSize="13dp"
+            android:layout_marginTop="80dp"
+            android:gravity="left" />
+
+        <Spinner
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:id="@+id/spinner_category"
+            android:layout_marginTop="75dp"
+            android:layout_marginLeft="3dp"
+            android:entries="@array/process"
+            android:layout_gravity="right"
+            android:background="@drawable/spinnerborder"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Tool Spec"
+            android:textColor="@color/blue"
+            android:textSize="13dp"
+            android:layout_marginTop="113dp"
+            android:gravity="left" />
+        <Spinner
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:id="@+id/spinner_spec"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="3dp"
+            android:entries="@array/process"
+            android:layout_gravity="right"
+            android:background="@drawable/spinnerborder"/>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/process_new"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="85dp"-->
+<!--            app:errorEnabled="true">-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/process_new1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Tool Category"-->
+<!--                android:editable="false"-->
+<!--                android:textSize="10dp"-->
+<!--                tools:ignore="Deprecated" />-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:contentPadding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Tool Details"
+            android:textColor="@color/blue"
+            android:textSize="15dp"
+            android:layout_marginBottom="16dp"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:id="@+id/new_barcode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="38dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_barcode2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Barcode"
+                android:editable="true"
+                android:textSize="6dp"
+                tools:ignore="Deprecated" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/new_desc"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/new_desc2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:editable="true"
+                android:textSize="6dp"
+                tools:ignore="Deprecated"
+                android:layout_gravity="left"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manufacturer"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_marginTop="130dp"/>
+        <Spinner
+            android:layout_width="140dp"
+            android:layout_height="25dp"
+            android:id="@+id/spinner_manufacturer"
+            android:layout_marginTop="150dp"
+            android:entries="@array/manufacturer"
+            android:background="@drawable/spinnerborder"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PM Cycle (Months)"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="130dp"
+            android:layout_marginRight="40dp"
+          />
+
+        <Spinner
+            android:id="@+id/spinner_pmcycle"
+            android:layout_width="140dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/spinnerborder"
+            android:entries="@array/months" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last PM"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_marginTop="180dp"/>
+
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="25dp"
+            android:background="@drawable/newinput"
+            android:layout_marginTop="200dp"
+            android:id="@+id/date"
+            android:clickable="true"
+            android:editable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rack"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_marginTop="230dp"/>
+
+        <Spinner
+            android:layout_width="140dp"
+            android:layout_height="25dp"
+            android:id="@+id/spinner_rack"
+            android:layout_marginTop="250dp"
+            android:entries="@array/rack"
+            android:background="@drawable/spinnerborder"/>
+
+        <ImageButton
+            android:id="@+id/img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="202dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="122dp"
+            android:src="@drawable/ic_date_range_black_24dp"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="106dp"
+            android:layout_marginTop="180dp"/>
+
+        <Spinner
+            android:layout_width="140dp"
+            android:layout_height="25dp"
+            android:id="@+id/spinner_status"
+            android:layout_marginTop="200dp"
+            android:entries="@array/newstatus"
+            android:layout_gravity="right"
+            android:background="@drawable/spinnerborder"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Row"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="116dp"
+            android:layout_marginTop="230dp"/>
+
+        <Spinner
+            android:layout_width="140dp"
+            android:layout_height="25dp"
+            android:id="@+id/spinner_row"
+            android:layout_marginTop="250dp"
+            android:entries="@array/row"
+            android:layout_gravity="right"
+            android:background="@drawable/spinnerborder"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Section"
+            android:textColor="@color/blue"
+            android:textSize="12dp"
+            android:layout_marginTop="280dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:id="@+id/spinner_section"
+            android:layout_marginTop="300dp"
+            android:entries="@array/section"
+            android:background="@drawable/spinnerborder"/>
+
+        <Button
+            android:id="@+id/register_save"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="350dp"
+            android:background="@drawable/button"
+            android:text="REGISTER"
+            android:enabled="true"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+<!--        <Spinner-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="36dp"-->
+<!--            android:id="@+id/spinner_pmcycle"-->
+<!--            android:layout_marginTop="168dp"-->
+<!--            android:layout_marginLeft="3dp"-->
+<!--            android:layout_gravity="left"-->
+<!--            android:entries="@array/months"-->
+<!--            android:background="@drawable/spinnerborder"/>-->
+
+</com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+    </FrameLayout>
+</ScrollView>

@@ -13,17 +13,17 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="api">api/tms?</string>
+    <string name="api">api/tmsDev?</string>
 
     <string name="name">com.example.myapplication.name</string>
 
     <string-array name="names">
         <item>-STATUS-</item>
-        <item>Available</item>
-        <item>Faulty</item>
-        <item>PM</item>
-        <item>In Use</item>
-        <item>MAINT/REPAIR</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="status">
@@ -32,34 +32,108 @@
         <item>Pm/faulty Checkout</item>
     </string-array>
 
-<!--    <string-array name="names2">-->
-<!--        <item>Process</item>-->
-<!--        <item>STB</item>-->
-<!--        <item>ASA</item>-->
-<!--        <item>BALL ATTACH</item>-->
-<!--        <item>DEK</item>-->
-<!--        <item>DEK(FOL)</item>-->
-<!--        <item>DAT(FOL)</item>-->
-<!--        <item>IPAC(FOL)</item>-->
-<!--        <item>PNP</item>-->
-<!--        <item>DEK TOOLINGS</item>-->
-<!--        <item>DATACON TOOLINGS</item>-->
-<!--        <item>FINAL TEST</item>-->
-<!--        <item>DRAGON</item>-->
-<!--        <item>MOUNTING</item>-->
-<!--        <item>SAWING</item>-->
-<!--        <item>LASER</item>-->
-<!--        <item>DIPENSING</item>-->
-<!--        <item>FUJI</item>-->
-<!--    </string-array>-->
+    <string-array name="process">
+<!--                <item>1</item>-->
+<!--                <item>2</item>-->
+<!--                <item>3</item>-->
+    </string-array>
 
-<!--    <string-array name="spinner2">-->
-<!--        <item>Select the process</item>-->
-<!--    </string-array>-->
+    <string-array name="min_tool">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="manufacturer">
+        <!--        <item>MACHINE ID</item>-->
+    </string-array>
+
+    <string-array name="months">
+        <!--        <item>MACHINE ID</item>-->
+
+
+    </string-array>
+
+    <string-array name="newstatus">
+        <!--        <item>MACHINE ID</item>-->
+
+
+    </string-array>
+
+    <string-array name="row">
+        <!--        <item>MACHINE ID</item>-->
+        <item>-SELECT-</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3 </item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8 </item>
+        <item>9</item>
+        <item>10</item>
+
+    </string-array>
+
+    <string-array name="rack">
+        <!--        <item>MACHINE ID</item>-->
+        <!--        <item>-SELECT-</item>-->
+        <!--        <item>1-(VOID)3</item>-->
+        <!--        <item>1-ASA CABINET 2.1</item>-->
+        <!--        <item>1-ASA CABINET 2.2</item>-->
+        <!--        <item>1-ASA CABINET 3</item>-->
+        <!--        <item>1-ASA CABINET 1.2</item>-->
+        <!--        <item>2-BM CABINET-6 </item>-->
+        <!--        <item>2-BM CABINET-7 </item>-->
+        <!--        <item>2-BM CABINET-8 </item>-->
+        <!--        <item>3-BM CABINET-9 </item>-->
+        <!--        <item>DATACON</item>-->
+        <!--        <item>DATACON TOOLINGS</item>-->
+        <!--        <item>DEK TOOLINGS</item>-->
+        <!--        <item>FUJI/IPAC TOOLINGS</item>-->
+        <!--        <item>IPAC CABINET 1 </item>-->
+        <!--        <item>TEMPORARY </item>-->
+    </string-array>
+
+    <string-array name="section">
+        <!--        <item>MACHINE ID</item>-->
+        <item>-SELECT-</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3 </item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!--    <string-array name="names2">-->
+    <!--        <item>Process</item>-->
+    <!--        <item>STB</item>-->
+    <!--        <item>ASA</item>-->
+    <!--        <item>BALL ATTACH</item>-->
+    <!--        <item>DEK</item>-->
+    <!--        <item>DEK(FOL)</item>-->
+    <!--        <item>DAT(FOL)</item>-->
+    <!--        <item>IPAC(FOL)</item>-->
+    <!--        <item>PNP</item>-->
+    <!--        <item>DEK TOOLINGS</item>-->
+    <!--        <item>DATACON TOOLINGS</item>-->
+    <!--        <item>FINAL TEST</item>-->
+    <!--        <item>DRAGON</item>-->
+    <!--        <item>MOUNTING</item>-->
+    <!--        <item>SAWING</item>-->
+    <!--        <item>LASER</item>-->
+    <!--        <item>DIPENSING</item>-->
+    <!--        <item>FUJI</item>-->
+    <!--    </string-array>-->
+
+    <!--    <string-array name="spinner2">-->
+    <!--        <item>Select the process</item>-->
+    <!--    </string-array>-->
 
 
     <string-array name="asa">
-<!--        <item>MACHINE ID</item>-->
+        <!--        <item>MACHINE ID</item>-->
         <item>STF-01</item>
         <item>STF-02</item>
         <item>STF-03</item>
@@ -121,7 +195,8 @@
         <item>FCQ-F07A-RH</item>
     </string-array>
 
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

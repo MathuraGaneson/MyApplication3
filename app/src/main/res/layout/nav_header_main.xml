@@ -19,18 +19,20 @@
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/images"
+        app:srcCompat="@drawable/tool"
 
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:id="@+id/version_name"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20dp"
-        android:text="Welcome To TMS"
+        android:textSize="15dp"
+        android:text="Version 1.0" />
+
+
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 

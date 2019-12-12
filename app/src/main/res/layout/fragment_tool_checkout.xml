@@ -4,22 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".tool_checkout">
+    tools:context=".tool_checkout"
+    android:background="@drawable/imagesblue">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:contentPadding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:contentPadding="16dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Tools Check Out"
-            android:textColor="@color/blue"
-            android:textSize="15dp"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="16dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Tools Check Out"
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
 
 
 
@@ -37,7 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Barcode ID"
-                android:textSize="13dp"/>
+                android:editable="false"
+                android:textSize="10dp"
+                tools:ignore="Deprecated" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +60,7 @@
                 android:enabled="false"
                 android:hint="Employee Name"
                 android:text="mathura"
-                android:textSize="13dp"/>
+                android:textSize="11dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Manual Key-in Machine ID"
                 android:enabled="false"
-                android:textSize="13dp"/>
+                android:textSize="11dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Remarks Out"
-                android:textSize="13dp"/>
+                android:textSize="11dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

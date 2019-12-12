@@ -180,7 +180,7 @@ public class checkin extends Fragment {
             @Override
             public void onClick(View view) {
 
-                GetValidbarcode();
+//                GetValidbarcode();
 
 //                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
 //
@@ -254,7 +254,7 @@ private  void Getcheckin(){
                 String StatusID = spinner.getSelectedItem().toString();
                 String CardID = employee.getText().toString();
 
-                final String updatedata = "/api/tms?toolinupdate=(\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"StatusID\":\"" + StatusID + "\",\"ReturnBy\":\"" + CardID + "\")";
+                final String updatedata = "/api/tmsDev?toolinupdate={\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"StatusID\":\"" + StatusID + "\",\"ReturnBy\":\"" + CardID + "\"}";
 //                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("http://pngjvfa01")
@@ -267,7 +267,7 @@ private  void Getcheckin(){
                     public void onResponse(Call<String> call, Response<String> response) {
 //                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getContext(),"success in GetCheckin",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(),"success in GetCheckin",Toast.LENGTH_SHORT).show();
 
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
                         alertDialogBuilder.setMessage("Check In Completed.");
@@ -289,7 +289,7 @@ private  void Getcheckin(){
 }
     private void GetValidbarcode(){
 
-        final String data = "/api/tms?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
+        final String data = "/api/tmsDev?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://pngjvfa01")
@@ -311,29 +311,26 @@ private  void Getcheckin(){
                     if (valid.equals("\"false\"")){
                         Toast.makeText(getContext(), "Tool Not Exist", Toast.LENGTH_SHORT).show();
 //                        barcode.setText("");
-//                        remark.setEnabled(false);
-//                        spinner.setEnabled(false);
+
 
                     }else if(valid.equals("\"true\"")){
-                        Getcheckin();
 //                        barcode.setText("");
-
                         if(remark.getText().toString().trim().length()>0){
                             if(!spinner.getSelectedItem().toString().trim().equals("-STATUS-"))
                             {
 //                                Toast.makeText(getContext(),"success in GetValidationbarcode",Toast.LENGTH_SHORT).show();
-//                                Getcheckin();
+                                Getcheckin();
 //                                Toast.makeText(getContext(), "Check In Completed", Toast.LENGTH_SHORT).show();
 //                                remark.setText("");
 
                             }else{
                                 Toast.makeText(getContext(), "Status Invalid", Toast.LENGTH_SHORT).show();
-
+                                remark.setText("");
                             }
                         }else{
                                 Toast.makeText(getContext(), "remarks Invalid", Toast.LENGTH_SHORT).show();
                             }
-                        Getcheckin();
+
                     }else {
                         Toast.makeText(getContext(), "Barcode Invalid", Toast.LENGTH_SHORT).show();
                     }

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,10 +11,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -36,6 +43,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.R.layout.simple_spinner_item;
+import static androidx.core.content.ContextCompat.getSystemService;
 
 
 /**
@@ -63,6 +71,23 @@ public class tool_checkout extends Fragment {
     private String Process;
 
     private checkin.OnFragmentInteractionListener mListener;
+
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 //    public static tool_checkout mewInstance() {
 //      tool_checkout fragment = new tool_checkout();
 //        return fragment;
@@ -101,7 +126,31 @@ public class tool_checkout extends Fragment {
         spinner2 = view.findViewById(R.id.action_bar_spinner3);
 
 
+
+
+        barcode.setShowSoftInputOnFocus(false);
+        barcode.addTextChangedListener(textWatcher);
+        barcode.setText("");
+        barcode.requestFocus();
         GetValidProcess();
+
+
+        barcode.setInputType(InputType.TYPE_CLASS_TEXT);
+        barcode.requestFocus();
+        InputMethodManager mgr = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.showSoftInput(barcode, InputMethodManager.SHOW_FORCED);
+
+
+        barcode.setClickable(false);
+
+        barcode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                hideKeyboard(getActivity());
+            }
+        });
+
+        barcode.requestFocus();
 
 
 
@@ -174,10 +223,37 @@ public class tool_checkout extends Fragment {
 ////                transaction.commit();
 //            }
 //        });
+
+//        barcode.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View view, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+//                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE); imm.hideSoftInputFromWindow(barcode.getWindowToken(), 0);
+//                    barcode.setFocusable(false);
+//                    barcode.setFocusableInTouchMode(true);
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
         return view;
     }
 
 
+
+    public static void hideKeyboard(Activity activity) {
+
+        View view = activity.findViewById(android.R.id.content);
+
+        if (view != null) {
+
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        }
+
+    }
 
     private void GetInsertdata(){
 
@@ -190,11 +266,12 @@ public class tool_checkout extends Fragment {
         if (spinner2.isEnabled() && !(machineID_keyin.isEnabled())) {
 
             MachineId = spinner2.getSelectedItem().toString();
+
         } else if (!spinner2.isEnabled() && machineID_keyin.isEnabled()) {
             MachineId = machineID_keyin.getText().toString();
         }
 
-        final String data = "/api/TMS?CreateCheckoutData= {\"BarCodeID\":\"" + BarcodeId + "\",\"CardID\":\"" + EmployeeName + "\", \"MachineID\":\"" + MachineId + "\", \"RemarksOut\":\"" + Remarks + "\"}";
+        final String data = "/api/TMSDev?CreateCheckoutData= {\"BarCodeID\":\"" + BarcodeId + "\",\"CardID\":\"" + EmployeeName + "\", \"MachineID\":\"" + MachineId + "\", \"RemarksOut\":\"" + Remarks + "\"}";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://pngjvfa01/")
@@ -206,8 +283,8 @@ public class tool_checkout extends Fragment {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(getContext(),data, Toast.LENGTH_SHORT).show();
-                 Toast.makeText(getContext(), "Checkout Success", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),data, Toast.LENGTH_SHORT).show();
+//                 Toast.makeText(getContext(), "Checkout Success", Toast.LENGTH_SHORT).show();
                 barcode.setText("");
                 remark.setText("");
                 machineID_keyin.setText("");
@@ -219,7 +296,7 @@ public class tool_checkout extends Fragment {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "TEST", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -305,7 +382,7 @@ public class tool_checkout extends Fragment {
 
 
    private void GetValidProcess(){
-         String data = "/api/tms?outupdatedata=ok";
+         String data = "/api/tmsDev?outupdatedata=ok";
 
        Retrofit retrofit = new Retrofit
                .Builder()
@@ -383,7 +460,7 @@ public class tool_checkout extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     Process = spinner.getSelectedItem().toString();
-                    Toast.makeText(getContext(), Process, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), Process, Toast.LENGTH_SHORT).show();
 
                     machineidList.clear();
                     GetValidMachineId();
@@ -411,7 +488,7 @@ public class tool_checkout extends Fragment {
         String json_process;
         json_process = "{\"process\":\"" + Process + "\"}";
 
-        String data = "/api/tms?process=" + json_process;
+        String data = "/api/tmsDev?machineid=" + json_process;
 
         Retrofit retrofit = new Retrofit
                 .Builder()
@@ -532,6 +609,7 @@ public class tool_checkout extends Fragment {
         SharedPreferences prefs = getContext().getSharedPreferences("tms", Context.MODE_PRIVATE);
         employee.setText(prefs.getString("username","no data"));
     }
+
 
 
 

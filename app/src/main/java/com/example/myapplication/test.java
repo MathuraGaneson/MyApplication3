@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,10 +13,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -42,7 +45,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class test extends Fragment {
     private String apilink;
      View view;
-     private Button btn_scan;
+     private Button btn_clear;
      private EditText barcode;
      ListView lv;
      ArrayList<ToolInfo> info;
@@ -70,7 +73,11 @@ public class test extends Fragment {
 //                transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 //                transaction.replace(R.id.tool_info, ((tool_info) toolinfo).newInstance());
 //                transaction.commit();
-             GetValidbarcode();
+            if(!TextUtils.isEmpty(barcode.getText().toString())){
+                 GetValidbarcode();
+            }
+
+
          }
      };
 
@@ -90,10 +97,24 @@ public class test extends Fragment {
 //        apilink = getString(R.string.api);
 //        btn_scan = view.findViewById(R.id.button_scan);
 
+
         barcode = view.findViewById(R.id.editText);
+//        btn_clear = view.findViewById(R.id.clear);
+
+
+//        btn_clear.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                barcode.setText("");
+//            }
+//        });
+
+
         barcode.setShowSoftInputOnFocus(false);
         barcode.addTextChangedListener(textWatcher);
         barcode.requestFocus();
+
+        hideKeyboard( getActivity());
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mEditor = mPreferences.edit();
@@ -111,22 +132,38 @@ public class test extends Fragment {
 //            }
 //        });
         return view;
+
     }
 
+    public static void hideKeyboard(Activity activity) {
+
+        View view = activity.findViewById(android.R.id.content);
+
+        if (view != null) {
+
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        }
+
+    }
+
+
+
+
     private void checkbarcodesharepreferences(){
-        mEditor = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE).edit();
-        mEditor.putString("barcode", barcode.getText().toString());
-        mEditor.commit();
+            mEditor = getContext().getSharedPreferences("barcodeshare", MODE_PRIVATE).edit();
+            mEditor.putString("barcode", barcode.getText().toString());
+            mEditor.commit();
     }
 
 
     private void GetValidbarcode(){
-        final String data = "/api/tms?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
-
-
+        String data = "/api/tmsDev?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://pngjvfa01/")
+                .baseUrl("http://pngjvfa01")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
@@ -143,17 +180,30 @@ public class test extends Fragment {
 //                      boolean valid2 = false;
                         if (valid.equals("\"true\"")){
                         Toast.makeText(getContext(), "Barcode Exist", Toast.LENGTH_SHORT).show();
-                        checkbarcodesharepreferences();
-                        Fragment toolinfo = new tool_info();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                        transaction.replace(R.id.tool_info,tool_info.newInstance());
-                        transaction.commit();
+                        //checkbarcodesharepreferences();
+//                        barcode.setText("");
+//                        Fragment toolinfo = new tool_info();
+//                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                        transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+//                        transaction.replace(R.id.tool_info,tool_info.newInstance());
+//                        transaction.commit();
+//
+//                        Toast.makeText(getContext(), barcode.getText().toString(), Toast.LENGTH_SHORT).show();
 
                     }else{
                         Toast.makeText(getContext(), "Barcode not exist!", Toast.LENGTH_SHORT).show();
-                        barcode.setText("");
+//                        barcode.setText("");
                     }
+
+                    checkbarcodesharepreferences();
+                    barcode.setText("");
+                    Fragment toolinfo = new tool_info();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                    transaction.replace(R.id.tool_info,tool_info.newInstance());
+                    transaction.commit();
+
+//                    Toast.makeText(getContext(), barcode.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -164,10 +214,20 @@ public class test extends Fragment {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "TEST", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "NO CONNECTION", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-           }
+//    private void checkedittext(){
+//
+//        if(barcode.getText() != null){
+//            barcode.setText("");
+//        }else{
+//
+//        }
+//
+//           }
+
+}

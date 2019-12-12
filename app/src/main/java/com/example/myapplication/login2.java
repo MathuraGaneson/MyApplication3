@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -55,6 +54,12 @@ public class login2 extends AppCompatActivity {
 
     private EditText login, password,employee;
     private android.util.Log Log;
+    private TextView version;
+
+    public static login2 newInstance() {
+        login2 Fragment =  new login2();
+        return Fragment;
+    }
 
 
     @Override
@@ -65,10 +70,13 @@ public class login2 extends AppCompatActivity {
         login =  findViewById(R.id.login);
         password = findViewById(R.id.password);
         employee = findViewById(R.id.employee_name);
+        version = findViewById(R.id.version_name);
 
 
         mPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mPreferences.edit();
+
+        setVersionName();
 
 
 //        checkSharedPreferences();
@@ -102,7 +110,7 @@ public class login2 extends AppCompatActivity {
 
 
     private void GetValid(){
-       String data ="/api/tms?logindata={\"username\":\"" + login.getText().toString() + "\",\"password\":\"" + password.getText().toString() + "\"}";
+       String data ="/api/tmsDev?logindata={\"username\":\"" + login.getText().toString() + "\",\"password\":\"" + password.getText().toString() + "\"}";
 
 
 
@@ -134,10 +142,14 @@ public class login2 extends AppCompatActivity {
 
            @Override
            public void onFailure(Call<String> call, Throwable t) {
-               Toast.makeText(getApplicationContext(), "TEST", Toast.LENGTH_SHORT).show();
+               Toast.makeText(getApplicationContext(), "No Connection", Toast.LENGTH_SHORT).show();
            }
        });
 
+    }
+
+    private void setVersionName(){
+        version.setText("Version: " + BuildConfig.VERSION_NAME);
     }
 
 

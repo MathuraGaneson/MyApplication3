@@ -24,12 +24,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    TextView version;
 //        @Override
 //        protected void onCreate(Bundle savedInstanceState) {
 //            super.onCreate(savedInstanceState);
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        version = findViewById(R.id.version_name);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        FloatingActionButton fab = findViewById(R.id.fab);
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        setVersionName();
 
 
 
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.tool_search) {
@@ -136,12 +142,26 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.master_container, ((tool_checkout)checkoutfragment ).newInstance());
             transaction.commit(); }
 
-//           else if (id == R.id.testing) {
-//            Fragment testingfragment = new testing();
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-//            transaction.replace(R.id.master_container, ((testing) testingfragment).newInstance());
-//            transaction.commit(); }
+           else if (id == R.id.newtool) {
+            Fragment newtoolfragment = new register_tool();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            transaction.replace(R.id.master_container, ((register_tool) newtoolfragment).newInstance());
+            transaction.commit(); }
+
+        else if (id == R.id.newcategory) {
+            Fragment newgroupfragment = new new_group();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            transaction.replace(R.id.master_container, ((new_group) newgroupfragment).newInstance());
+            transaction.commit(); }
+
+        else if (id == R.id.newspec) {
+            Fragment newspecfragment = new new_spec();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            transaction.replace(R.id.master_container, ((new_spec) newspecfragment).newInstance());
+            transaction.commit(); }
 
            else if (id == R.id.logout) {
             Fragment logoutfragment = new logout();
@@ -155,6 +175,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setVersionName(){
+        version.setText("Version: " + BuildConfig.VERSION_NAME);
     }
 
 
