@@ -16,6 +16,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+
+import static android.R.layout.simple_spinner_item;
 
 
 public class checkin extends Fragment {
@@ -45,6 +54,11 @@ public class checkin extends Fragment {
 
     TextView employee, remark,barcode;
     private String mParam2;
+
+    ArrayList<ToolInfo> infoArrayList;
+
+    ArrayList<String> statusList = new ArrayList<>();
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,6 +77,9 @@ public class checkin extends Fragment {
 
         @Override
         public void afterTextChanged(Editable editable) {
+
+
+
 //             Fragment toolinfo = new tool_info();
 //                FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //                transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
@@ -116,10 +133,12 @@ public class checkin extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_checkin, container, false);
 
-        btn_checkin = view.findViewById(R.id.checkin_save);
+//        btn_checkin = view.findViewById(R.id.checkin_save);
         btn_reset = view.findViewById(R.id.checkin_reset);
 
         employee = view.findViewById(R.id.employee_name);
+
+        GetStatus();
 
         barcode = view.findViewById(R.id.barcode_checkin);
         barcode.setShowSoftInputOnFocus(false);
@@ -138,6 +157,7 @@ public class checkin extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 hideKeyboard(getActivity());
+
             }
         });
 
@@ -176,25 +196,6 @@ public class checkin extends Fragment {
 
         btn_save = view.findViewById(R.id.checkin_save);
 
-        btn_checkin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                GetValidbarcode();
-
-//                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
-//
-//                String Remarks = remark.getText().toString();
-//                String Status = spinner.getSelectedItem().toString();
-//
-//                String updatedata = "(\"Remarks\":\"" + Remarks + "\",\"Status\":\"" + Status + "\")";
-//                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
         btn_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,6 +210,8 @@ public class checkin extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Getcheckin();
+//                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
                 GetValidbarcode();
 //                Toast.makeText(getContext(), "Saved Successfully",Toast.LENGTH_SHORT).show();
 
@@ -248,13 +251,102 @@ public class checkin extends Fragment {
      employee.setText(prefs.getString("username","no data"));
  }
 
+    private void GetStatus(){
+        String data = "/api/tmsDev?statuslist=ok";
+
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl("http://pngjvfa01")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+//       String test = "http://pngjvfa01" + data;
+
+
+        Call<String> call = retrofit.create(retro.GetStatus1.class).getstatus1(data);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("Responsestring", response.body());
+//               Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+
+                if(response.isSuccessful()){
+                    if(response.body() !=null){
+                        Log.i("OnSuccess",response.body());
+
+//                       Toast.makeText(getContext(), "2", Toast.LENGTH_SHORT).show();
+                        String jsonresponse = response.body();
+                        statusJson(jsonresponse);
+
+                    }
+                    else{
+                        Log.i("onEmptyResponse", "Returned empty response");
+                        Toast.makeText(getContext(),"fail",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+
+    private void statusJson(String jsonresponse){
+
+        try {
+
+            JSONObject obj = new JSONObject(jsonresponse);
+
+            infoArrayList = new ArrayList<>();
+            JSONArray dataArray = obj.getJSONArray("info");
+
+            for (int i = 0; i < dataArray.length(); i++)
+            {
+
+                ToolInfo toolInfo = new ToolInfo();
+                JSONObject dataObj = dataArray.getJSONObject(i);
+
+                toolInfo.setProcess(dataObj.getString("status"));
+
+
+                infoArrayList.add(toolInfo);
+            }
+
+            for (int i = 0; i < infoArrayList.size();i++){
+                statusList.add(infoArrayList.get(i).getProcess());
+
+            }
+
+
+            ArrayAdapter<String> AspinnerArrayAdapter5 = new ArrayAdapter<String>(getContext(), simple_spinner_item , statusList );
+            AspinnerArrayAdapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(AspinnerArrayAdapter5);
+//            spinner.setSelection(0,true);
+
+
+
+
+        } catch (JSONException e){
+            e.printStackTrace();
+
+        }
+
+
+    }
+
 private  void Getcheckin(){
                 String BarCodeID = barcode.getText().toString();
                 String RemarksIn = remark.getText().toString();
-                String StatusID = spinner.getSelectedItem().toString();
-                String CardID = employee.getText().toString();
+                String Status = spinner.getSelectedItem().toString();
+                String ReturnBy = employee.getText().toString();
 
-                final String updatedata = "/api/tmsDev?toolinupdate={\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"StatusID\":\"" + StatusID + "\",\"ReturnBy\":\"" + CardID + "\"}";
+                final String updatedata = "/api/tmsDev?toolin={\"BarCodeID\":\"" + BarCodeID + "\",\"RemarksIn\":\"" + RemarksIn + "\",\"Status\":\"" + Status + "\",\"ReturnBy\":\"" + ReturnBy + "\"}";
 //                Toast.makeText(getContext(),updatedata,Toast.LENGTH_SHORT).show();
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("http://pngjvfa01")
@@ -265,20 +357,34 @@ private  void Getcheckin(){
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-//                        Toast.makeText(getContext(),"Successful", Toast.LENGTH_SHORT).show();
+                        if(response.isSuccessful()){
+                            String count =response.body();
 
-//                        Toast.makeText(getContext(),"success in GetCheckin",Toast.LENGTH_SHORT).show();
+                            if(count.equals("{\"Update\":\"Already Update\"}")){
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                                alertDialogBuilder.setMessage("Already Updated");
+                                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-                        alertDialogBuilder.setMessage("Check In Completed.");
-                        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
 
                             }
-                        });
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
+                            else{
+                                Toast.makeText(getContext(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+
+                        }
+
+                        else{
+                            Toast.makeText(getContext(), "Try Again", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
@@ -287,70 +393,6 @@ private  void Getcheckin(){
                     }
                 });
 }
-    private void GetValidbarcode(){
-
-        final String data = "/api/tmsDev?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://pngjvfa01")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        Call<String> call = retrofit.create(retro.GetValidbarcode.class).getvalidationbarcode(data);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful()){
-                    String valid = response.body();
-
-//                    info = new ArrayList<>(Arrays.asList(valid.));
-//                    lv = view.findViewById(R.id.listview);
-//                    lv.setAdapter(new SearchToolAdapter(info, getActivity()));
-//                      boolean valid = true;
-//                      boolean valid2 = false;
-                    if (valid.equals("\"false\"")){
-                        Toast.makeText(getContext(), "Tool Not Exist", Toast.LENGTH_SHORT).show();
-//                        barcode.setText("");
-
-
-                    }else if(valid.equals("\"true\"")){
-//                        barcode.setText("");
-                        if(remark.getText().toString().trim().length()>0){
-                            if(!spinner.getSelectedItem().toString().trim().equals("-STATUS-"))
-                            {
-//                                Toast.makeText(getContext(),"success in GetValidationbarcode",Toast.LENGTH_SHORT).show();
-                                Getcheckin();
-//                                Toast.makeText(getContext(), "Check In Completed", Toast.LENGTH_SHORT).show();
-//                                remark.setText("");
-
-                            }else{
-                                Toast.makeText(getContext(), "Status Invalid", Toast.LENGTH_SHORT).show();
-                                remark.setText("");
-                            }
-                        }else{
-                                Toast.makeText(getContext(), "remarks Invalid", Toast.LENGTH_SHORT).show();
-                            }
-
-                    }else {
-                        Toast.makeText(getContext(), "Barcode Invalid", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-                else{
-                    Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
-                    barcode.setText("");
-                }
-
-                barcode.setText("");
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "Get Validation Barcode Fail", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
 
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
@@ -390,6 +432,46 @@ private  void Getcheckin(){
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    private void GetValidbarcode(){
+        String data = "/api/tmsDev?barcodedata={\"barcodeid\":\"" + barcode.getText().toString() + "\"}";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://pngjvfa01")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        Call<String> call = retrofit.create(retro.GetValidbarcode.class).getvalidationbarcode(data);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    String valid = response.body();
+                    if (valid.equals("\"true\"")){
+//                        Toast.makeText(getContext(), "Barcode Exist", Toast.LENGTH_SHORT).show();
+                      Getcheckin();
+
+                    }else{
+                        Toast.makeText(getContext(), "Barcode not exist!", Toast.LENGTH_SHORT).show();
+//
+                    }
+
+                }
+                else{
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getContext(), "NO CONNECTION", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
 
 }
